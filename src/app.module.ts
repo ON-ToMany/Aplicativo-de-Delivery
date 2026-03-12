@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Produto } from './Produto/entities/produto.entity';
+import { produtoModule } from './Produto/produto.module';
 
 @Module({
   imports: [
@@ -14,10 +16,12 @@ ConfigModule.forRoot({
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: [],
+      entities: [Produto],
       synchronize: true,
       logging: true,
     }),
+ produtoModule
+ 
   ],
   controllers: [],
   providers: [],
