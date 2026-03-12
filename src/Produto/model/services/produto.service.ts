@@ -1,6 +1,6 @@
 import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm";
 import { Produto } from "../../entities/produto.entity";
-import { Repository } from "typeorm";
+import { ILike, Repository } from "typeorm";
 import { DeleteResult } from "typeorm/browser";
 import { HttpCode, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
@@ -37,9 +37,9 @@ return await this.produto.delete(id)
 
 }
 
-async findbyname(nome:string):Promise<Produto|null>{
+async findbyname(nome:string):Promise<Produto[]>{
 
-    return await this.produto.findOne({where:{nome},relations:{
+    return await this.produto.find({where:{nome:ILike(`%${nome}%`)},relations:{
 
 
 }})
@@ -49,17 +49,12 @@ async findbyname(nome:string):Promise<Produto|null>{
 
 async update(produto:Produto):Promise<Produto>{
  await this.findbyid(produto.id)
-const buscarNomeProduto = await this.findbyname(produto.nome)
-
- if(buscarNomeProduto && buscarNomeProduto.id !== produto.id)
-    
-throw new HttpException("produto ja cadastrado",HttpStatus.NOT_FOUND)
-
-return this.produto.save(produto)
+ return  await this.produto.save(produto)
 
 
 
 }
+
 
 
 

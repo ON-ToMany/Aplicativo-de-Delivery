@@ -37,11 +37,14 @@ export class produtoController{
 
     }
 
-    @Get("/nome")
-    @HttpCode(HttpStatus.FOUND)
-    FindbyName(@Param("nome") nome:string ):Promise<Produto |null>{
-        return this.produto.findbyname(nome)
-    }
+@Get('/nome/:nome')
+  @HttpCode(HttpStatus.OK)
+  findAllByName(@Param('nome') nome: string): Promise<Produto[]> {
+    return this.produto.findbyname(nome);
+  }
+
+
+
 
     @Delete("/:id")
     @HttpCode(HttpStatus.OK)
