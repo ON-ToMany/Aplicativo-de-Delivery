@@ -7,11 +7,11 @@ import { Usuario } from '../entity/usuario.entity';
 export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
-    private usuarioRepository: Repository<Usuario>,
+    private readonly usuario: Repository<Usuario>,
   ) {}
 
   async findByUsuario(usuario: string): Promise<Usuario | null> {
-    return await this.usuarioRepository.findOne({
+    return await this.usuario.findOne({
       where: {
         usuario: usuario,
       },
@@ -19,11 +19,11 @@ export class UsuarioService {
   }
 
   async findAll(): Promise<Usuario[]> {
-    return await this.usuarioRepository.find({});
+    return await this.usuario.find({});
   }
 
   async findById(id: number): Promise<Usuario> {
-    const usuario = await this.usuarioRepository.findOne({
+    const usuario = await this.usuario.findOne({
       where: {
         id,
       },
@@ -41,7 +41,7 @@ export class UsuarioService {
     if (buscaUsuario)
       throw new HttpException('O Usuario já existe!', HttpStatus.BAD_REQUEST);
     
-     return usuario;
+     return this.usuario.save(usuario);
   }
 
   async update(usuario: Usuario): Promise<Usuario> {
@@ -54,6 +54,6 @@ export class UsuarioService {
         'Usuário (e-mail) já Cadastrado!',
         HttpStatus.BAD_REQUEST,
       );
-       return usuario;
+       return this.usuario.save(usuario);
   }
 }

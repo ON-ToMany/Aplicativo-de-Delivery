@@ -13,6 +13,7 @@ export class CategoriaService {
     async findAll(): Promise<Categoria[]> {
         return await this.categoriaRepository.find();
     }
+    
     async findById(id: number): Promise<Categoria> {
         const categoria = await this.categoriaRepository.findOne({
             where: { id },            
