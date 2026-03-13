@@ -17,6 +17,6 @@ export class Categoria {
     @Column({ length: 255, nullable: false })
     targetAudience: string; 
     
-     @OneToMany(() => Produto, (produto) => produto)
+    @OneToMany(() => Produto, (produto) => produto)
     produto: Produto[];
 }

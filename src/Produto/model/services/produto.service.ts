@@ -3,11 +3,24 @@ import { Produto } from "../../entities/produto.entity";
 import { ILike, Repository } from "typeorm";
 import { DeleteResult } from "typeorm/browser";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import calculeNutriscore from "nutriscore-2025";
 
 @Injectable()
 export class produtoService{
 constructor( @InjectRepository(Produto) private readonly produto:Repository<Produto>){}
 
+private calcNutriscore(produto: Produto): void {
+  const { nutriscore } = calculeNutriscore({
+    energy: produto.calorias,                 
+    fibers: produto.fibra,
+    proteins: produto.proteina,
+    saturatedFats: produto.gordura_saturada,
+    sodium: produto.sodio,
+    sugar: produto.acucar,
+    fruitsPercentage: produto.frutas_vegetais_percentual,
+  });
+  produto.nutri_score = nutriscore;
+}
   async findall():Promise<Produto[]>{
     return await this.produto.find()
   }
@@ -28,6 +41,7 @@ constructor( @InjectRepository(Produto) private readonly produto:Repository<Prod
 
 
   async create(produto:Produto):Promise<Produto>{
+    this.calcNutriscore(produto); // realiza o calculo do nutriscore e retorna no body no compo nutri_score a letra correspondente ao nutriscore do produto
     return this.produto.save(produto)
   }
 
@@ -48,6 +62,7 @@ constructor( @InjectRepository(Produto) private readonly produto:Repository<Prod
 
   async update(produto:Produto):Promise<Produto>{
     await this.findbyid(produto.id)
+    this.calcNutriscore(produto);
     return  await this.produto.save(produto)
   }
 
