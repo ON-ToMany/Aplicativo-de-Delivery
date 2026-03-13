@@ -12,15 +12,12 @@ import {
 import { Usuario } from '../entity/usuario.entity';
 import { UsuarioService } from '../services/usuario.services';
 
-
-
-
 @Controller('/usuarios')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   
-  @Get('/all')
+  @Get()
   @HttpCode(HttpStatus.OK)
   findAll(): Promise<Usuario[]> {
     return this.usuarioService.findAll();

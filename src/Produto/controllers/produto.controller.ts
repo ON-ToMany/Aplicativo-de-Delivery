@@ -3,7 +3,7 @@ import { Produto } from "../entities/produto.entity";
 import { produtoService } from "../model/services/produto.service";
 import { DeleteResult } from "typeorm";
 
-@Controller("/produto")
+@Controller("/produtos")
 export class produtoController{
   constructor(private produto:produtoService){}
 
