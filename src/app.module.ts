@@ -20,7 +20,6 @@ import { UsuarioModule } from './Usuario/usuario.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      
       entities: [Produto, Categoria, Usuario], 
       synchronize: true,
       logging: true,
