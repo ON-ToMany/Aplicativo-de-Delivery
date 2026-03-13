@@ -1,8 +1,8 @@
-import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm";
+import {  InjectRepository } from "@nestjs/typeorm";
 import { Produto } from "../../entities/produto.entity";
 import { ILike, Repository } from "typeorm";
 import { DeleteResult } from "typeorm/browser";
-import { HttpCode, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
 @Injectable()
 export class produtoService{
@@ -16,11 +16,15 @@ return await this.produto.find()
 }
  async findbyid(id:number):Promise<Produto | null>{
 
-return this.produto.findOne({where:{id},relations:{
-
+ const buscaproduto =  await this.produto.findOne({where:{id},relations:{
+usuario:true,categoria:true
 
 
 }})
+
+     if (!buscaproduto)
+            throw new HttpException('Categoria não encontrada!', HttpStatus.NOT_FOUND);
+return buscaproduto
 
  }
 
@@ -40,6 +44,8 @@ return await this.produto.delete(id)
 async findbyname(nome:string):Promise<Produto[]>{
 
     return await this.produto.find({where:{nome:ILike(`%${nome}%`)},relations:{
+        usuario:true,
+        categoria:true
 
 
 }})

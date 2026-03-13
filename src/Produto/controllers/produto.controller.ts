@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post,Put } from "@nestjs/common";
 import { Produto } from "../entities/produto.entity";
 import { produtoService } from "../model/services/produto.service";
-import { id } from "date-fns/locale";
 import { DeleteResult } from "typeorm";
 
 @Controller("/produto")
