@@ -42,7 +42,8 @@ Mais do que um sistema, o projeto busca gerar impacto social, conectando tecnolo
 - 🏷️ Categorias de alimentos
   
 ---
-## 🥗 Nutri-Score
+<img src="https://img.shields.io/badge/Nutri--Score-A→E-4CAF50?style=for-the-badge" />
+
 
 O **Nutri-Score** é um sistema de classificação nutricional que avalia a qualidade dos alimentos com base em seus componentes.
 
