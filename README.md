@@ -39,9 +39,32 @@ Mais do que um sistema, o projeto busca gerar impacto social, conectando tecnolo
 - 📊 Informações nutricionais detalhadas  
 - 🥗 Classificação nutricional (Nutri-Score)  
 - 👤 Cadastro de usuários  
-- 🏷️ Categorias de alimentos  
-- 🔐 Autenticação com JWT  
+- 🏷️ Categorias de alimentos
+  
+---
+## 🥗 Nutri-Score
 
+O **Nutri-Score** é um sistema de classificação nutricional que avalia a qualidade dos alimentos com base em seus componentes.
+
+A pontuação vai de:
+
+- 🟢 **A** — mais saudável  
+- 🟡 **B**  
+- 🟠 **C**  
+- 🔴 **D**  
+- ⚫ **E** — menos saudável  
+
+Essa classificação é baseada em fatores como:
+
+- calorias  
+- açúcar  
+- gorduras  
+- sódio  
+- fibras  
+- proteínas  
+- percentual de frutas e vegetais  
+
+O FriendlyFood utiliza esse sistema para ajudar usuários a tomarem decisões alimentares mais conscientes.
 ---
 
 ## ⚙️ Tecnologias
