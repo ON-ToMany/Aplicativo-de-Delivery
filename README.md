@@ -112,6 +112,3 @@ npm run start:dev
 <p align="center">
 <img width="300" height="400" alt="onetomany" src="https://github.com/user-attachments/assets/66ceac0b-c09f-4317-b576-a4962622abfc" />
 </p>
-
-
-
