@@ -1,13 +1,13 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Produto } from "./entities/produto.entity";
 import { Module } from "@nestjs/common";
-import { produtoService } from "./model/services/produto.service";
 import { produtoController } from "./controllers/produto.controller";
+import { ProdutoService } from "./model/services/produto.service";
 
 @Module({
 imports:[TypeOrmModule.forFeature([Produto])],
-exports:[produtoService],
-providers:[produtoService],
+exports:[ProdutoService],
+providers:[ProdutoService],
 controllers:[produtoController]
 
 

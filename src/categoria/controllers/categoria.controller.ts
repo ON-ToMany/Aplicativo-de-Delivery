@@ -2,12 +2,14 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus,
     Param, Post, Put, ParseIntPipe } from "@nestjs/common";
 import { Categoria } from "../entities/categoria.entity";
 import { CategoriaService } from "../services/categoria.service";
+import { ApiTags } from "@nestjs/swagger";
 
 @Controller("/categorias") 
 export class CategoriaController {
   
   constructor(private readonly categoriaService: CategoriaService) { }
 
+  @ApiTags('Categoria')
   @Get()
   @HttpCode(HttpStatus.OK)
   findAll(): Promise<Categoria[]> {

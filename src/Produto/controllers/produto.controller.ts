@@ -1,45 +1,48 @@
+
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post,Put } from "@nestjs/common";
 import { Produto } from "../entities/produto.entity";
-import { produtoService } from "../model/services/produto.service";
 import { DeleteResult } from "typeorm";
+import { ProdutoService } from "../model/services/produto.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Produto')
 @Controller("/produtos")
 export class produtoController{
-  constructor(private produto:produtoService){}
+  constructor(private readonly produtoService: ProdutoService){}
 
   @Get()
   @HttpCode(HttpStatus.OK)
   findall():Promise<Produto[]>{
-    return this.produto.findall()
+    return this.produtoService.findall()
   }
 
   @Get("/:id")
   @HttpCode(HttpStatus.FOUND)
   findById(@Param("id",ParseIntPipe ) id:number):Promise<Produto|null>{
-    return this.produto.findbyid(id)
+    return this.produtoService.findbyid(id)
   }
    
   @Post("/cadastrar")
   @HttpCode(HttpStatus.CREATED)
   create(@Body()produto:Produto ):Promise<Produto>{
-    return this.produto.create(produto)   
+    return this.produtoService.create(produto)   
   }
 
   @Put("/atualizar")
   @HttpCode(HttpStatus.CREATED)
   update(@Body() produto:Produto):Promise<Produto>{
-    return this.produto.update(produto)
+    return this.produtoService.update(produto)
   }
 
   @Get('/nome/:nome')
   @HttpCode(HttpStatus.OK)
   findAllByName(@Param('nome') nome: string): Promise<Produto[]> {
-    return this.produto.findbyname(nome);
+    return this.produtoService.findbyname(nome);
   }
 
   @Delete("/:id")
   @HttpCode(HttpStatus.OK)
   delete(@Param("id",ParseIntPipe) id:number ):Promise<DeleteResult>{
-    return this.produto.delete(id)
+    return this.produtoService.delete(id)
   }
 }

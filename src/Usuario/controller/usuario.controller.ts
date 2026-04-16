@@ -1,45 +1,39 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-  Post,
-  Put,
-} from '@nestjs/common';
-import { Usuario } from '../entity/usuario.entity';
-import { UsuarioService } from '../services/usuario.services';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { Usuario } from "../entity/usuario.entity";
+import { UsuarioService } from "../services/usuario.services";
 
-@Controller('/usuarios')
+
+@ApiTags('Usuario')
+@Controller("/usuarios")
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+    constructor(private readonly usuarioService: UsuarioService) { }
 
-  
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  findAll(): Promise<Usuario[]> {
-    return this.usuarioService.findAll();
-  }
+   
+    @Get('/all')
+    @HttpCode(HttpStatus.OK)
+    findAll(): Promise<Usuario[]> {
+        return this.usuarioService.findAll();
+    }
+    
+    
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Usuario>{
+        return this.usuarioService.findById(id)
+    }
 
+    @HttpCode(HttpStatus.CREATED)
+    @Post('/cadastrar')
+    async create(@Body() usuario: Usuario): Promise<Usuario> {
+        return await this.usuarioService.create(usuario);
+    }
 
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
-  findById(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
-    return this.usuarioService.findById(id);
-  }
+    
+    @Put('/atualizar')
+    @HttpCode(HttpStatus.OK)
+    async update(@Body() usuario: Usuario): Promise<Usuario> {
+        return this.usuarioService.update(usuario);
+    }
 
-  @Post('/cadastrar')
-  @HttpCode(HttpStatus.CREATED)
-  async create(@Body() usuario: Usuario): Promise<Usuario> {
-    return this.usuarioService.create(usuario);
-  }
-
-
-  @Put('/atualizar')
-  @HttpCode(HttpStatus.OK)
-  async update(@Body() usuario: Usuario): Promise<Usuario> {
-    return this.usuarioService.update(usuario);
-  }
 }

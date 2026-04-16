@@ -6,7 +6,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import calculeNutriscore from "nutriscore-2025";
 
 @Injectable()
-export class produtoService{
+export class ProdutoService{
 constructor( @InjectRepository(Produto) private readonly produto:Repository<Produto>){}
 
 private calcNutriscore(produto: Produto): void {
