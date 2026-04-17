@@ -5,12 +5,10 @@ import { produtoController } from "./controllers/produto.controller";
 import { ProdutoService } from "./model/services/produto.service";
 
 @Module({
-imports:[TypeOrmModule.forFeature([Produto])],
-exports:[ProdutoService],
-providers:[ProdutoService],
-controllers:[produtoController]
-
-
+    imports:[TypeOrmModule.forFeature([Produto])],
+    exports:[ProdutoService],
+    providers:[ProdutoService],
+    controllers:[produtoController]
 })
 
 export class produtoModule{}
