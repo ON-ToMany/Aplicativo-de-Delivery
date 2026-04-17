@@ -5,7 +5,7 @@ import { produtoModule } from './Produto/produto.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { UsuarioModule } from './Usuario/usuario.module'; 
 import { AppController } from './app.controller';
-import { ProdService } from './data/services/produto.service';
+import { ProdService } from './data/services/prod.service';
 
 @Module({
   imports:[ConfigModule.forRoot(),
