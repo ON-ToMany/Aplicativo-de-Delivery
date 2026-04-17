@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn,Column, ManyToOne, OneToMany} from "type
 import { IsNotEmpty } from "class-validator";
 import { Transform } from "class-transformer";
 import { Categoria } from "../../categoria/entities/categoria.entity";
-import { Usuario } from "../../usuario/entity/usuario.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity({name:"tb_produtos"})
