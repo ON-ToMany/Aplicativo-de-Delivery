@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
-import { Produto } from "../../Produto/entities/produto.entity";
 import { Categoria } from "../../categoria/entities/categoria.entity";
-import { Usuario } from "../../Usuario/entity/usuario.entity";
+import { Usuario } from "../../usuario/entity/usuario.entity";
+import { Produto } from "../../produto/entities/produto.entity";
+
 
 @Injectable()
 export class DevService implements TypeOrmOptionsFactory {

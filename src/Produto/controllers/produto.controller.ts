@@ -2,12 +2,12 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post,Put } from "@nestjs/common";
 import { Produto } from "../entities/produto.entity";
 import { DeleteResult } from "typeorm";
-import { ProdutoService } from "../model/services/produto.service";
+import { ProdutoService } from "../services/produto.service";
 import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Produto')
 @Controller("/produtos")
-export class produtoController{
+export class ProdutoController{
   constructor(private readonly produtoService: ProdutoService){}
 
   @Get()

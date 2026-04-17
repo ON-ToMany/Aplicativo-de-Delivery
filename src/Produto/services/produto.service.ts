@@ -1,13 +1,18 @@
 import {  InjectRepository } from "@nestjs/typeorm";
-import { Produto } from "../../entities/produto.entity";
 import { ILike, Repository } from "typeorm";
 import { DeleteResult } from "typeorm/browser";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import calculeNutriscore from "nutriscore-2025";
+import { Produto } from "../entities/produto.entity";
+import { CategoriaService } from "../../categoria/services/categoria.service";
 
 @Injectable()
 export class ProdutoService{
-constructor( @InjectRepository(Produto) private readonly produto:Repository<Produto>){}
+constructor( 
+    @InjectRepository(Produto) 
+    private produto:Repository<Produto>, 
+    private readonly categoriaService: CategoriaService  
+  ){}
 
 private calcNutriscore(produto: Produto): void {
   const { nutriscore } = calculeNutriscore({

@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn,Column, ManyToOne, OneToMany} from "type
 import { IsNotEmpty } from "class-validator";
 import { Transform } from "class-transformer";
 import { Categoria } from "../../categoria/entities/categoria.entity";
-import { Usuario } from "../../Usuario/entity/usuario.entity";
+import { Usuario } from "../../usuario/entity/usuario.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity({name:"tb_produtos"})
@@ -63,15 +63,20 @@ export class Produto{
 
   // no momento do teste, quando for cadastrar um alimento, esse campo não deve ser incluido no momento do cadastro, ele é retornado automaticamente depois pela service
   // porque ele é calculado com base nos valores dos outros atributos.
+  @ApiProperty()
   @Column({ type: 'varchar', length: 1}) 
   nutri_score: string;
 
-  @ApiProperty({ type: () => Categoria})  
-  @ManyToOne(() => Usuario ,(x) => x.produto)
-  usuario: Usuario;
-
-  @ApiProperty({type: () => Usuario})  
-  @ManyToOne(() => Categoria, (categoria) => categoria.produto)
+  @ApiProperty({type: () => Categoria})  
+  @ManyToOne(() => Categoria, (categoria) => categoria.produto, {
+    onDelete: 'CASCADE',
+  })
   categoria: Categoria;
+
+  @ApiProperty({ type: () => Usuario})  
+  @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
+    onDelete: 'CASCADE',
+  })
+  usuario: Usuario;
 
 }

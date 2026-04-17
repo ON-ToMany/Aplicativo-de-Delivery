@@ -5,7 +5,7 @@ import { UsuarioController } from './controller/usuario.controller';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsEmail, MinLength } from 'class-validator';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Produto } from '../Produto/entities/produto.entity';
+import { Produto } from '../produto/entities/produto.entity';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
