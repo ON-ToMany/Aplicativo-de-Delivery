@@ -17,7 +17,7 @@ export class ProdutoController{
   }
 
   @Get("/:id")
-  @HttpCode(HttpStatus.FOUND)
+  @HttpCode(HttpStatus.OK)
   findById(@Param("id",ParseIntPipe ) id:number):Promise<Produto|null>{
     return this.produtoService.findbyid(id)
   }
