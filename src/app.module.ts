@@ -6,6 +6,7 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { UsuarioModule } from './Usuario/usuario.module'; 
 import { AppController } from './app.controller';
 import { ProdService } from './data/services/prod.service';
+import { DevService } from './data/services/dev.service';
 
 @Module({
   imports:[ConfigModule.forRoot(),
